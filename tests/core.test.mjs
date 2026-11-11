@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {BANDS,bandForHz,toHz,toNm,normalizeFrame,sliceIntoBands,parseInputText,createDemoFrame,createDemoImage} from '../src/core.mjs';
+test('frequency and wavelength conversion round trip',()=>{for(const n of [350,550,910,12000])assert.ok(Math.abs(toNm(toHz(n))-n)<1e-8);});
+test('frequency classifier covers all seven bands',()=>{for(const b of BANDS)assert.equal(bandForHz(Math.sqrt(b.min*b.max)),b.id);});
+test('normalizes and sorts spectral bins',()=>{const f=normalizeFrame({type:'spectrum',frequencies_hz:[200e6,100e6],values:[2,1]});assert.deepEqual(f.values,[1,2]);assert.equal(sliceIntoBands(f)[0].band,'radio');});
+test('optical array spans infrared and visible and uv',()=>{const f=normalizeFrame({type:'spectrum',wavelengths_nm:[350,550,910],values:[1,2,3]});const keys=sliceIntoBands(f).map(x=>x.band);assert.deepEqual(keys,['infrared','visible','ultraviolet']);});
+test('requires nonempty finite spectrum',()=>{assert.throws(()=>normalizeFrame({type:'spectrum',frequencies_hz:[1,2],values:[1]}));assert.throws(()=>normalizeFrame({type:'spectrum',frequencies_hz:[0],values:[2]}));assert.throws(()=>normalizeFrame({type:'spectrum',frequencies_hz:[1],values:[Infinity]}));});
+test('validates image array shape',()=>{const frame=normalizeFrame({type:'image',width:2,height:2,pixels:[1,2,3,4],unit:'K'});assert.equal(frame.pixels.length,4);assert.throws(()=>normalizeFrame({type:'image',width:2,height:2,pixels:[1,2]}));});
+test('parses csv and jsonl',()=>{assert.equal(parseInputText('frequency_hz,value\n100000,5\n100001,7','a.csv')[0].values.length,2);assert.equal(parseInputText('{"type":"image","width":1,"height":1,"pixels":[22]}','a.jsonl').length,1);});
+test('generates synthetic frames with full provenance',()=>{const f=createDemoFrame('radio',2),i=createDemoImage(2);assert.equal(f.origin,'simulation');assert.equal(f.frequencies_hz.length,170);assert.equal(i.origin,'simulation');assert.equal(i.pixels.length,i.width*i.height);});

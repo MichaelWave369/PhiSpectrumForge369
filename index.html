@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080f19"><title>Φ SpectrumForge369 · Reality Translator</title><link rel="stylesheet" href="src/style.css"></head>
+<body>
+<div class="shell">
+<header class="topbar"><div class="brand"><span class="glyph">Φ</span><span><strong>SPECTRUM<span class="accent">FORGE</span><small>369</small></strong><label>THE REALITY TRANSLATOR · v0.1</label></span></div><div class="topright"><span class="tiny">INSTRUMENTATION LAB / 2026</span><span id="status" class="status simulated">● SIMULATED DATA</span></div></header>
+<div class="headline"><div><div class="eyebrow">FIELD OBSERVATION SYSTEM / MULTI-SPECTRAL RUNTIME</div><h1>See beyond <em>visible.</em></h1><p>One signal pipeline. Multiple physical sensors. Human-readable representations.</p></div><div class="hero-reading"><span>SENSOR STATE</span><strong id="modeLabel">SYNTHETIC DEMO</strong><small id="lastSeen">No hardware connected</small></div></div>
+<nav class="bands" id="bandButtons" aria-label="Electromagnetic bands"></nav>
+<div class="workspace">
+<section class="main-panel"><div class="panelbar"><div><div class="section-kicker">ACTIVE BAND <span id="bandName">VISIBLE</span></div><div class="section-sub" id="bandRange">400–790 THz</div></div><div class="viewtabs" role="group" aria-label="Visual mode"><button class="tab active" data-view="waterfall">WATERFALL</button><button class="tab" data-view="spectrum">SPECTRUM</button><button class="tab" data-view="image">SENSOR IMAGE</button></div></div>
+<div class="monitor"><canvas id="monitor" role="img" aria-label="Spectrum visualization"></canvas><video id="camera" playsinline autoplay muted hidden></video><div id="canvasWatermark">SYNTHETIC · NOT A PHYSICAL MEASUREMENT</div></div>
+<div class="monitor-meta"><span><i class="led"></i><span id="frameCount">0</span> FRAMES</span><span id="binCount">0 BINS</span><span id="sourceReadout">SOURCE: DEMO GENERATOR</span></div>
+<div class="meters"><div><label>LEVEL RANGE</label><strong id="levelRange">—</strong></div><div><label>LAST FRAME</label><strong id="timestamp">—</strong></div><div><label>COVERAGE</label><strong id="coverage">—</strong></div></div>
+</section>
+<aside class="side-panel"><div class="aside-heading"><span class="section-kicker">01 / INPUT SOURCES</span><p>Hardware is the window. This engine is the translator.</p></div><div class="buttonstack"><button class="action primary" id="demoBtn">◉ START SYNTHETIC DEMO</button><button class="action" id="serialBtn">⌁ CONNECT SERIAL SENSOR</button><button class="action" id="importBtn">↥ IMPORT CSV / JSONL</button><button class="action" id="cameraBtn">◎ VISIBLE CAMERA VIEW</button><input type="file" id="fileInput" accept=".csv,.jsonl,.json,.txt" hidden></div>
+<div class="aside-heading separator"><span class="section-kicker">02 / DISPLAY TRANSLATION</span><p>False colors visualize values. They are not the actual colors of invisible radiation.</p></div>
+<div class="field"><label for="palette">COLOR MAP</label><select id="palette"><option value="inferno">THERMAL / INFERNO</option><option value="ocean">OCEAN / CYAN</option><option value="mono">MONOCHROME</option></select></div><div class="field"><div class="flex-label"><label for="gain">DISPLAY GAIN</label><output id="gainLabel">0</output></div><input id="gain" type="range" min="-45" max="45" value="0" step="1"></div>
+<div class="aside-heading separator"><span class="section-kicker">03 / SCIENCE & PROVENANCE</span><p id="bandDescription">Visible light is the part of the electromagnetic spectrum our eyes can detect.</p></div>
+<div class="info"><div><span>PHYSICS DOMAIN</span><b>ELECTROMAGNETIC</b></div><div><span>MEASUREMENT TYPE</span><b id="measurementType">SYNTHETIC</b></div><div><span>HARDWARE PROVENANCE</span><b id="sensorLabel">NONE ATTACHED</b></div></div>
+</aside></div>
+<div class="bottom"><div class="bottom-left"><span class="section-kicker">04 / SESSION</span><div class="session-actions"><button id="exportBtn">↓ EXPORT JSONL</button><button id="snapshotBtn">▧ SAVE IMAGE</button><button id="clearBtn">× CLEAR DATA</button></div></div><div class="notice"><strong>SCIENCE, NOT SORCERY.</strong> Every plot must identify whether its inputs are measured, imported, or generated. Dark matter and dark energy are not additional sensor bands.</div></div>
+<footer>PHI369 LABS <span>OPEN SIGNALS · OPEN DATA · AUDITABLE SOURCES</span> <a href="docs/PROTOCOL.md" target="_blank" rel="noopener">DATA PROTOCOL ↗</a></footer>
+</div>
+<div id="toast" aria-live="polite" role="status"></div><script type="module" src="src/app.mjs"></script></body></html>

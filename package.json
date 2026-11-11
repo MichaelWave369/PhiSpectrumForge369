@@ -1,0 +1,1 @@
+{"name":"spectrumforge369","private":true,"type":"module","version":"0.1.0","description":"Spectral data visualization and acquisition runtime","scripts":{"test":"node --test tests/*.test.mjs","start":"python -m http.server 8765"},"license":"MIT"}
